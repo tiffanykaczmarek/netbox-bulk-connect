@@ -1,0 +1,140 @@
+#vbox {
+    -fx-background-color: #D9EDF7;
+    -fx-padding: 0 0 0 0;
+	}
+
+#hilfevbox {
+	-fx-background-color: #FAFAFA;
+	-fx-font-size: 12px;
+	-fx-padding: 5 15 5 15;
+}
+
+#ausgabebutton {
+    -fx-base: #0080FF;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    }
+    
+.tooltip {
+    -fx-text-fill: #0080FF;
+    -fx-background-color: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 3 );
+    -fx-font-size: 0.85em;
+    
+}
+    
+#aktualisierbtn {          
+    -fx-background-image: url("css/reload.png");
+    -fx-background-size: 28 28;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;   
+    -fx-text-fill: #0080FF;
+    -fx-font-size: 14px;
+    -fx-base: #ffffff;
+}
+    
+#importbutton {
+    -fx-base: #0080FF;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    }
+    
+#exitbutton, #kopierbutton {
+    -fx-text-fill: #0080FF;
+    -fx-font-size: 14px;
+    -fx-base: #ffffff;
+    }
+    
+Button {
+	-fx-base: #0080FF;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+	}
+    
+#Ausgabe {
+	-fx-border-color: #9CCDFE;
+	-fx-highlight-fill: #60B1FB;
+	}
+
+    
+#Token {
+    -fx-font-size: 12px;
+	}
+
+#Kabeltyp, #DeviceA, #DeviceB {
+    -fx-min-width: 220px;
+    -fx-min-height: 30px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+	}
+
+
+TextField {
+	-fx-highlight-fill: #60B1FB;
+	-fx-font-size: 14px;
+	-fx-background-color: #9CCDFE , white , white;
+	}
+
+
+Text {
+	-fx-font-size: 14px;
+	}
+	
+#hilfetext {
+	-fx-font-size: 12px;
+	-fx-text-fill: #0B3861; 
+	-fx-fill: #0B3861;
+	}
+	
+#ueberschrift {
+	-fx-text-fill: #0B3861;
+	-fx-fill: #0B3861;
+	-fx-font-style: oblique;
+	-fx-font-size: 16px;
+}
+	
+#gespeichert {
+	-fx-font-size: 12px;
+	-fx-text-fill: #848484;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #9CCDFE;
+	}
+
+
+.combo-box-popup .list-view .list-cell:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover {
+	-fx-background-color: #0080FF;
+	}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+	-fx-background-color: #0080FF;
+	}
+
+.choice-box .menu-item:focused {
+	-fx-background-color: #0080FF;
+	}
+
+.choice-box .menu-item:focused > .label {
+	-fx-text-fill: white;
+	}
+
+
+.menu-item {
+	-fx-padding: 5 40 10 5;
+	}
+
+.menu:hover,
+.menu:showing, 
+.menu-item:focused {
+	-fx-background-color: #0080FF;
+	}
+
+.menu-item:focused {
+	-fx-background-color: #0080FF;
+	}
+
+.menu {
+	-fx-padding: 5 15 5 15;
+	}

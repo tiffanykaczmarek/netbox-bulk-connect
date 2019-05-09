@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HilfeController" fx:id="scroll" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER"  hvalue="1.0" vvalue="1.0" vbarPolicy="AS_NEEDED" >
+    <content>
+		<VBox maxHeight="-Infinity" maxWidth="-Infinity" alignment="center" fx:id="hilfevbox" spacing="10">
+			<Button fx:id="exitbutton" text="Schließen" onAction="#ExitOnAction" maxWidth="100"/>
+			<Text fx:id="ueberschrift" text="Hilfe - Über das Programm"></Text>
+			<Text fx:id="hilfetext" wrappingWidth="565" text="&#xD;
+Erste Schritte&#xD;
+- Beim ersten Programmstart ist es erforderlich, die Einstellungen unter Datei -> Einstellungen anzupassen&#xD;
+- Die Einstellungen sind standardmäßig auf den Server „netbox“ und eine http Verschlüsselung festgelegt&#xD;
+- Für den CSV Import ist ein Token nicht zwingend erforderlich. Das Feld kann freigelassen werden.&#xD;
+  In Netbox unter -> Profile -> API Tokens sind alle Token abrufbar&#xD;
+- WICHTIG: Möchten Sie die automatische Eintragung nutzen, MUSS zwingend ein Token gewählt werden. Dieser muss über Lese- und Schreibrechte verfügen! Hierfür bei der Erstellung/Editierung der API Token, innerhalb von Netbox, den Haken bei „Write enabled“ setzen&#xD;
+&#xD;&#xD;
+Rearports auswählen&#xD;
+- Alle Felder sind Pflichtfelder&#xD;
+- Es werden automatisch alle Devices mit vorhandenen Rearports, welche noch nicht verbunden sind, &#xD;von Netbox abgerufen&#xD;
+- Wählen Sie in „Device A“ das Patchpanel aus, welches Sie verbinden möchten.&#xD;
+- Wählen Sie in „Device B“ das Patchpanel aus, welches Sie mit dem Patchpanel „Device A“ verbinden möchten &#xD;
+- Die Portanzahl wird automatisch ermittelt&#xD;
+- Kabeltypen werden aus Netbox importiert&#xD;
+- Die Kabellänge ist in Metern und in ganzen Zahlen anzugeben, z.b. „100“&#xD;
+&#xD;&#xD;
+Rearports verbinden&#xD;&#xD;
+Es stehen zwei Möglichkeiten zur Verfügung, die Rearports miteinander zu verbinden.&#xD;
+&#xD;
+CSV Import&#xD;
+- Mit einem Klick auf „CSV Import“ können Sie sich die Verbindungen ausgeben lassen &#xD; und anschließend mit einem Klick auf „Kopieren“ in die Zwischenablage kopieren&#xD;
+- Den kopierten Text nun in Netbox unter Devices -> Cables -> Import, einfügen, und mit “Submit” alle Rearport Verbindungen anlegen lassen&#xD;
+&#xD;
+Automatische Eintragung&#xD;
+- Mit einem Klick auf „Automatische Eintragung“ werden die gewählten Verbindungen automatisch in Netbox übertragen und angelegt&#xD;
+- Verbundene Devices werden aus der Liste entfernt
+&#xD;">
+			</Text>
+			<Button fx:id="exitbutton" text="Schließen" onAction="#ExitOnAction" maxWidth="100"/>
+			<Text></Text>
+		</VBox>
+    </content>
+</ScrollPane>
+

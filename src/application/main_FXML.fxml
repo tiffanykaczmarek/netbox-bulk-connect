@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Tooltip?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="680" minWidth="-Infinity" prefHeight="650.0" prefWidth="690.0" fx:id="vbox" alignment="center" spacing="20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+	<children>
+		<MenuBar maxWidth="Infinity" VBox.vgrow="ALWAYS">
+			<menus>
+				<Menu text="Datei">
+					<items>
+						<MenuItem fx:id="menuSettings" text="Einstellungen" onAction="#OptionenOnAction"/>
+						<SeparatorMenuItem />
+						<MenuItem fx:id="menuClose" text="Schließen" onAction="#ExitOnAction"/>
+					</items>
+				</Menu>
+				<Menu text="Hilfe">
+					<items>
+						<MenuItem fx:id="menuHelp" text="Über das Programm" onAction="#HelpOnAction"/>
+					</items>
+				</Menu>
+     		 </menus>
+		</MenuBar>
+		
+ 	<GridPane alignment="center" hgap="13" vgap="13">
+ 	
+		<Text text="Name von Device A:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>         
+		<ComboBox maxWidth="225" minWidth="225" fx:id="DeviceA" GridPane.columnIndex="1" GridPane.rowIndex="0"></ComboBox>
+	 
+		<Text  text="Name von Device B:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>         
+		<ComboBox fx:id="DeviceB" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="1"></ComboBox>
+		
+		<Text text="Anzahl der Ports:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+		<TextField fx:id="Ports" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="2"></TextField>
+	
+	  	<Text text="Kabeltyp auswählen:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+		<ChoiceBox maxWidth="225" minWidth="225" fx:id="Kabeltyp" GridPane.columnIndex="1" GridPane.rowIndex="3"></ChoiceBox>
+	
+		<Text  text="Kabellänge in Metern:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>         
+		<TextField fx:id="Kabellänge" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="4"></TextField>
+		<Button fx:id="kopierbutton" onAction="#KopierenOnAction" text="Kopieren" maxWidth="150" minWidth="120" GridPane.columnIndex="0" GridPane.rowIndex="5">
+		 	<tooltip>
+ 			<Tooltip text="In Zwischenablage kopieren" />
+ 			</tooltip>
+ 		</Button>
+		<Button fx:id="ausgabebutton" onAction="#handleAction" text="Ausgabe CSV Format" maxWidth="180" minWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+ 	</GridPane>
+ 	
+ 	<HBox spacing="5" alignment="center">
+ 	<Button fx:id="aktualisierbtn" onAction="#AktOnAction" text="" maxWidth="38" minWidth="38">
+ 		<tooltip>
+ 		<Tooltip text="Aktualisieren" />
+ 		</tooltip>
+ 	</Button>
+ 	<Button fx:id="importbutton" onAction="#ImportierenOnAction" text="Automatische Eintragung" maxWidth="250" minWidth="250">
+		<tooltip>
+ 		<Tooltip text="In Netbox eintragen" />
+ 		</tooltip>
+ 	</Button>
+ 	</HBox>
+  	 	  	
+  	<TextArea fx:id="Ausgabe" minWidth="400" maxWidth="620" maxHeight="320" minHeight="250"></TextArea>
+  	<Label/>
+  
+ 	</children>
+		<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+		</padding>
+</VBox>
