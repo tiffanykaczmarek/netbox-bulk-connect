@@ -39,8 +39,8 @@ public class MenuController implements Initializable {
 	
 	public void mainaufrufen () throws IOException {
 		Parent mainlayout = FXMLLoader.load(getClass().getResource("main_FXML.fxml"));
-		Scene scene = new Scene(mainlayout,690,650);
-		Main.mainStage.setMaxHeight(680);
+		Scene scene = new Scene(mainlayout,690,642);
+		Main.mainStage.setMaxHeight(670);
 		Main.mainStage.setMaxWidth(690);
 		Main.mainStage.setResizable(false);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

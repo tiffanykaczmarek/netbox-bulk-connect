@@ -7,7 +7,7 @@
 	-fx-background-color: #FAFAFA;
 	-fx-font-size: 12px;
 	-fx-padding: 5 15 5 15;
-}
+	}
 
 #ausgabebutton {
     -fx-base: #0080FF;
@@ -19,19 +19,17 @@
     -fx-text-fill: #0080FF;
     -fx-background-color: white;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 3 );
-    -fx-font-size: 0.85em;
-    
-}
+    -fx-font-size: 0.85em;  
+	}
     
 #aktualisierbtn {          
-    -fx-background-image: url("css/reload.png");
     -fx-background-size: 28 28;
     -fx-background-repeat: no-repeat;
     -fx-background-position:center;   
     -fx-text-fill: #0080FF;
     -fx-font-size: 14px;
     -fx-base: #ffffff;
-}
+	}
     
 #importbutton {
     -fx-base: #0080FF;
@@ -55,7 +53,6 @@ Button {
 	-fx-border-color: #9CCDFE;
 	-fx-highlight-fill: #60B1FB;
 	}
-
     
 #Token {
     -fx-font-size: 12px;
@@ -68,13 +65,11 @@ Button {
     -fx-background-radius: 5;
 	}
 
-
 TextField {
 	-fx-highlight-fill: #60B1FB;
 	-fx-font-size: 14px;
 	-fx-background-color: #9CCDFE , white , white;
 	}
-
 
 Text {
 	-fx-font-size: 14px;
@@ -91,12 +86,18 @@ Text {
 	-fx-fill: #0B3861;
 	-fx-font-style: oblique;
 	-fx-font-size: 16px;
-}
+	}
+	
+#ueberschrift2 {
+	-fx-font-size: 14px;
+	-fx-text-fill: #0080FF; 
+	-fx-fill: #0080FF;
+	}
 	
 #gespeichert {
 	-fx-font-size: 12px;
 	-fx-text-fill: #848484;
-}
+	}
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {

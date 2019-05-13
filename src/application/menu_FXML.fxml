@@ -12,7 +12,7 @@
 
 <VBox fx:id="vbox" alignment="center" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
  	<GridPane alignment="center" hgap="13" vgap="13">
-		<Text text="Verschlüsselung*:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+		<Text text="Encryption*:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
 
 		<RadioButton fx:id="Auswahlhttp" GridPane.columnIndex="0" GridPane.rowIndex="1" text="http://" toggleGroup="$toggleGroup">
 			<toggleGroup>
@@ -28,8 +28,8 @@
 		<TextField fx:id="Token" maxWidth="300" minWidth="275" minHeight="35" GridPane.columnIndex="1" GridPane.rowIndex="3"></TextField>
 
 
-		<Button fx:id="exitbutton" onAction="#ExitOnAction" text="Abbrechen" maxWidth="100" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-		<Button fx:id="speicherbutton" onAction="#SpeichernOnAction" text="Speichern und Schließen" maxWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+		<Button fx:id="exitbutton" onAction="#ExitOnAction" text="Close" maxWidth="100" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+		<Button fx:id="speicherbutton" onAction="#SpeichernOnAction" text="Save and Close" maxWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 		
   	</GridPane>
        

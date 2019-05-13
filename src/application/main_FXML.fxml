@@ -27,16 +27,16 @@
 	<children>
 		<MenuBar maxWidth="Infinity" VBox.vgrow="ALWAYS">
 			<menus>
-				<Menu text="Datei">
+				<Menu text="File">
 					<items>
-						<MenuItem fx:id="menuSettings" text="Einstellungen" onAction="#OptionenOnAction"/>
+						<MenuItem fx:id="menuSettings" text="Settings" onAction="#OptionenOnAction"/>
 						<SeparatorMenuItem />
-						<MenuItem fx:id="menuClose" text="Schließen" onAction="#ExitOnAction"/>
+						<MenuItem fx:id="menuClose" text="Close" onAction="#ExitOnAction"/>
 					</items>
 				</Menu>
-				<Menu text="Hilfe">
+				<Menu text="Help">
 					<items>
-						<MenuItem fx:id="menuHelp" text="Über das Programm" onAction="#HelpOnAction"/>
+						<MenuItem fx:id="menuHelp" text="About" onAction="#HelpOnAction"/>
 					</items>
 				</Menu>
      		 </menus>
@@ -44,41 +44,43 @@
 		
  	<GridPane alignment="center" hgap="13" vgap="13">
  	
-		<Text text="Name von Device A:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>         
+		<Text text="Device A:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>         
 		<ComboBox maxWidth="225" minWidth="225" fx:id="DeviceA" GridPane.columnIndex="1" GridPane.rowIndex="0"></ComboBox>
 	 
-		<Text  text="Name von Device B:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>         
+		<Text  text="Device B:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>         
 		<ComboBox fx:id="DeviceB" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="1"></ComboBox>
 		
-		<Text text="Anzahl der Ports:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+		<Text text="Number of Ports:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 		<TextField fx:id="Ports" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="2"></TextField>
 	
-	  	<Text text="Kabeltyp auswählen:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+	  	<Text text="Cable Type:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 		<ChoiceBox maxWidth="225" minWidth="225" fx:id="Kabeltyp" GridPane.columnIndex="1" GridPane.rowIndex="3"></ChoiceBox>
 	
-		<Text  text="Kabellänge in Metern:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>         
+		<Text  text="Cable Length (m):" GridPane.columnIndex="0" GridPane.rowIndex="4"/>         
 		<TextField fx:id="Kabellänge" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="4"></TextField>
-		<Button fx:id="kopierbutton" onAction="#KopierenOnAction" text="Kopieren" maxWidth="150" minWidth="120" GridPane.columnIndex="0" GridPane.rowIndex="5">
+		<Button fx:id="kopierbutton" onAction="#KopierenOnAction" text="Copy" maxWidth="140" minWidth="140" GridPane.columnIndex="0" GridPane.rowIndex="5">
 		 	<tooltip>
- 			<Tooltip text="In Zwischenablage kopieren" />
+ 			<Tooltip text="copy to clipboard" />
  			</tooltip>
  		</Button>
-		<Button fx:id="ausgabebutton" onAction="#handleAction" text="Ausgabe CSV Format" maxWidth="180" minWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-
- 	</GridPane>
+		<Button fx:id="ausgabebutton" onAction="#handleAction" text="Print CSV format" maxWidth="180" minWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="5">
+		 	<tooltip>
+ 			<Tooltip text="print out connections for CSV import" />
+ 			</tooltip>
+ 		</Button>
+ 		<Button fx:id="aktualisierbtn" onAction="#AktOnAction" text="Refresh" maxWidth="140" minWidth="140" GridPane.columnIndex="0" GridPane.rowIndex="6">
+ 			<tooltip>
+ 			<Tooltip text="refresh devices" />
+ 			</tooltip>
+ 		</Button>
+ 		<Button fx:id="importbutton" onAction="#ImportierenOnAction" text="Connect Rear Ports" maxWidth="180" minWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="6">
+			<tooltip>
+ 			<Tooltip text="automatically connect devices in netbox" />
+ 			</tooltip>
+ 		</Button>
  	
- 	<HBox spacing="5" alignment="center">
- 	<Button fx:id="aktualisierbtn" onAction="#AktOnAction" text="" maxWidth="38" minWidth="38">
- 		<tooltip>
- 		<Tooltip text="Aktualisieren" />
- 		</tooltip>
- 	</Button>
- 	<Button fx:id="importbutton" onAction="#ImportierenOnAction" text="Automatische Eintragung" maxWidth="250" minWidth="250">
-		<tooltip>
- 		<Tooltip text="In Netbox eintragen" />
- 		</tooltip>
- 	</Button>
- 	</HBox>
+ 	</GridPane>
+
   	 	  	
   	<TextArea fx:id="Ausgabe" minWidth="400" maxWidth="620" maxHeight="320" minHeight="250"></TextArea>
   	<Label/>
