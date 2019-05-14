@@ -13,7 +13,7 @@ IMPORTANT: If you want to use the Option *Automatic Entry*, you have to select a
 For this purpose, when creating/editing the API token, within netbox, activate the tick in the checkbox "Write enabled".
 
 ## Select Devices
-All devices with existing rearports, which are not connected, are automatically retrieved from netbox
+All devices with existing rearports, which are not connected, are automatically retrieved from netbox.
 * in "Device A", select the device you want to connect
 * in "Device B", select the device you want to connect to the device "Device A"
 * the number of ports is determined automatically
@@ -37,3 +37,9 @@ By clicking on "Connect Rear Ports", the rear ports of the selected devices are 
 ![Screenshot 2](https://s18.directupload.net/images/190513/6aln4ht7.png)
 
 ![Screenshot 3](https://s18.directupload.net/images/190513/epjn46vq.png)
+
+***
+How to get your API Token
+<br>
+
+![Screenshot 4](https://s18.directupload.net/images/190514/55b3mova.png)
