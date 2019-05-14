@@ -2,11 +2,11 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>netboxfx.jar</jar>
-  <outfile>netboxfx.exe</outfile>
+  <jar>netbox-bulk-connect.jar</jar>
+  <outfile>netbox-bulk-connect.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
-  <chdir></chdir>
+  <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl>http://java.com/download</downloadUrl>
   <supportUrl></supportUrl>

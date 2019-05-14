@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+
+
+<VBox fx:id="vbox" alignment="center" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
+ 	<GridPane alignment="center" hgap="13" vgap="13">
+		<Text text="Encryption*:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+
+		<RadioButton fx:id="Auswahlhttp" GridPane.columnIndex="0" GridPane.rowIndex="1" text="http://" toggleGroup="$toggleGroup">
+			<toggleGroup>
+            	<ToggleGroup fx:id="toggleGroup"/>
+             </toggleGroup>
+		</RadioButton>  
+		<RadioButton fx:id="Auswahlhttps" GridPane.columnIndex="1" GridPane.rowIndex="1" selected="false" text="https://" toggleGroup="$toggleGroup"></RadioButton>
+
+		<Text text="Server*:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+		<TextField fx:id="Server" maxWidth="300" minWidth="275" minHeight="35" GridPane.columnIndex="1" GridPane.rowIndex="2"></TextField>
+
+		<Text  text="API Token:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>         
+		<TextField fx:id="Token" maxWidth="300" minWidth="275" minHeight="35" GridPane.columnIndex="1" GridPane.rowIndex="3"></TextField>
+
+
+		<Button fx:id="exitbutton" onAction="#ExitOnAction" text="Close" maxWidth="100" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+		<Button fx:id="speicherbutton" onAction="#SpeichernOnAction" text="Save and Close" maxWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+		
+  	</GridPane>
+       
+
+</VBox>
+
