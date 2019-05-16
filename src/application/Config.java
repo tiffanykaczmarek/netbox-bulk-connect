@@ -17,7 +17,8 @@ public class Config {
 
     // Hier kommen alle Attribute rein, die in der Datei gespeichert werden sollen 
     public String URL; 
-    public String Token; 
+    public String Token;
+    public String LengthUnit;
     
 
     public Config() { 
@@ -25,6 +26,7 @@ public class Config {
         // in der Datei vorhanden sind. Datei wird mit diesen Standardwerten neu erstellt 
            this.URL = "http://netbox"; 
            this.Token = "";   
+           this.LengthUnit = "Meters";
     } 
     
 

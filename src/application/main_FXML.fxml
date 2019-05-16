@@ -23,67 +23,109 @@
 <?import javafx.scene.control.Tooltip?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="680" minWidth="-Infinity" prefHeight="650.0" prefWidth="690.0" fx:id="vbox" alignment="center" spacing="20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="670" minWidth="-Infinity" prefHeight="670" prefWidth="690.0" fx:id="vbox" alignment="center" spacing="20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
 	<children>
 		<MenuBar maxWidth="Infinity" VBox.vgrow="ALWAYS">
 			<menus>
 				<Menu text="File">
 					<items>
-						<MenuItem fx:id="menuSettings" text="Settings" onAction="#OptionenOnAction"/>
+						<MenuItem fx:id="menuSettings" onAction="#OptionenOnAction" text="Settings" />
 						<SeparatorMenuItem />
-						<MenuItem fx:id="menuClose" text="Close" onAction="#ExitOnAction"/>
+						<MenuItem fx:id="menuClose" onAction="#ExitOnAction" text="Close" />
 					</items>
 				</Menu>
 				<Menu text="Help">
 					<items>
-						<MenuItem fx:id="menuHelp" text="About" onAction="#HelpOnAction"/>
+						<MenuItem fx:id="menuHelp" onAction="#HelpOnAction" text="About" />
 					</items>
 				</Menu>
      		 </menus>
 		</MenuBar>
 		
- 	<GridPane alignment="center" hgap="13" vgap="13">
+ 	<GridPane alignment="CENTER_LEFT" hgap="13" vgap="13">
  	
-		<Text text="Device A:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>         
-		<ComboBox maxWidth="225" minWidth="225" fx:id="DeviceA" GridPane.columnIndex="1" GridPane.rowIndex="0"></ComboBox>
+		<Text text="Device A:" GridPane.columnIndex="0" GridPane.rowIndex="0" />         
+		<ComboBox fx:id="DeviceA" maxWidth="225" minWidth="225" prefHeight="38" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 	 
-		<Text  text="Device B:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>         
-		<ComboBox fx:id="DeviceB" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="1"></ComboBox>
+		<Text text="Device B:" GridPane.rowIndex="1" />         
+		<ComboBox fx:id="DeviceB" maxWidth="225" minWidth="225" prefHeight="38" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 		
-		<Text text="Number of Ports:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-		<TextField fx:id="Ports" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="2"></TextField>
+		<Text text="Number of Ports:" GridPane.rowIndex="2" />
+		<TextField fx:id="Ports" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 	
-	  	<Text text="Cable Type:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-		<ChoiceBox maxWidth="225" minWidth="225" fx:id="Kabeltyp" GridPane.columnIndex="1" GridPane.rowIndex="3"></ChoiceBox>
-	
-		<Text  text="Cable Length (m):" GridPane.columnIndex="0" GridPane.rowIndex="4"/>         
-		<TextField fx:id="Kabellänge" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="4"></TextField>
-		<Button fx:id="kopierbutton" onAction="#KopierenOnAction" text="Copy" maxWidth="140" minWidth="140" GridPane.columnIndex="0" GridPane.rowIndex="5">
+	  	<Text text="Cable Type:" GridPane.rowIndex="3" />
+		<ChoiceBox fx:id="Kabeltyp" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+		<VBox GridPane.rowIndex="4">
+		<Text text="Cable Length:" /> 
+		<Text fx:id="leinheit" text="" />   
+		</VBox>    
+		<TextField fx:id="Kabellänge" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+			<Button fx:id="kopierbutton" contentDisplay="CENTER" maxWidth="120.0" minWidth="120.0" onAction="#KopierenOnAction" text="Copy" GridPane.halignment="LEFT" GridPane.rowIndex="5">
 		 	<tooltip>
  			<Tooltip text="copy to clipboard" />
  			</tooltip>
+            <GridPane.margin>
+               <Insets right="10.0" />
+            </GridPane.margin>
  		</Button>
-		<Button fx:id="ausgabebutton" onAction="#handleAction" text="Print CSV format" maxWidth="180" minWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="5">
+		<Button fx:id="ausgabebutton" maxWidth="210.0" minWidth="210.0" onAction="#handleAction" text="Print CSV Format" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
 		 	<tooltip>
  			<Tooltip text="print out connections for CSV import" />
  			</tooltip>
+            <GridPane.margin>
+               <Insets />
+            </GridPane.margin>
  		</Button>
- 		<Button fx:id="aktualisierbtn" onAction="#AktOnAction" text="Refresh" maxWidth="140" minWidth="140" GridPane.columnIndex="0" GridPane.rowIndex="6">
+ 		<Button fx:id="aktualisierbtn" maxWidth="120.0" minWidth="120.0" onAction="#AktOnAction" text="Refresh" GridPane.halignment="LEFT" GridPane.rowIndex="6">
  			<tooltip>
  			<Tooltip text="refresh devices" />
  			</tooltip>
  		</Button>
- 		<Button fx:id="importbutton" onAction="#ImportierenOnAction" text="Connect Rear Ports" maxWidth="180" minWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="6">
+ 		<Button fx:id="importbutton" maxWidth="210.0" minWidth="210.0" onAction="#ImportierenOnAction" text="Connect Rear Ports" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
 			<tooltip>
  			<Tooltip text="automatically connect devices in netbox" />
  			</tooltip>
+            <GridPane.margin>
+               <Insets />
+            </GridPane.margin>
  		</Button>
- 	
- 	</GridPane>
+         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+            <children>
+               <Text fx:id="choose" strokeType="OUTSIDE" strokeWidth="0.0" text="start index at">
+                  <VBox.margin>
+                     <Insets left="60.0" />
+                  </VBox.margin>
+               </Text>
+               <ComboBox fx:id="StartIndexA" minWidth="100.0" prefWidth="100.0">
+                  <VBox.margin>
+                     <Insets left="40.0" />
+                  </VBox.margin>
+               </ComboBox>
+            </children>
+         </VBox>
+         <VBox layoutX="411.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <children>
+               <Text fx:id="choose" strokeType="OUTSIDE" strokeWidth="0.0" text="start index at" textAlignment="CENTER">
+                  <VBox.margin>
+                     <Insets left="60.0" />
+                  </VBox.margin>
+               </Text>
+               <ComboBox fx:id="StartIndexB" minWidth="100.0" prefWidth="100.0">
+                  <VBox.margin>
+                     <Insets left="40.0" />
+                  </VBox.margin>
+               </ComboBox>
+            </children>
+         </VBox>
+         
+         <VBox.margin>
+            <Insets left="60.0" />
+         </VBox.margin>
 
-  	 	  	
-  	<TextArea fx:id="Ausgabe" minWidth="400" maxWidth="620" maxHeight="320" minHeight="250"></TextArea>
-  	<Label/>
+ 	</GridPane>
+	
+    <TextArea fx:id="Ausgabe" maxHeight="320" maxWidth="620" minHeight="250" minWidth="400" />
+  	<Label />
   
  	</children>
 		<padding>

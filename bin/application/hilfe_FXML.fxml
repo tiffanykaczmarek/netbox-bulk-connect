@@ -15,7 +15,7 @@
 text="&#xD;Netbox Bulk Connect is a tool to connect all devices with multiple rear ports in netbox automatically.&#xD;The tedious task of connecting all rearports manually is not necessary anymore.&#xD;"></Text>
 <Text fx:id="ueberschrift2" wrappingWidth="565" text="First Steps - Configurations"></Text>
 <Text fx:id="hilfetext" wrappingWidth="565" text="
-- When first starting the software, it is necessary to change the settings under File -> Settings. The settings are set by default to server netbox and an http encryption.&#xD;
+- When first starting the software, it is necessary to change the settings under File -> Settings. The settings are set by default to server „netbox“, an http encryption and the length unit „Meters“ for cables.&#xD;
 - If you only want to use the Option CSV Import, a token is not required and the field can be left blank.&#xD;
 - To get your API Token, take a look at netbox -> Profiles -> API Tokens.&#xD;
 &#xD;IMPORTANT: If you want to use the Option Automatic Entry, you have to select a Token with rights to read and write.
@@ -30,7 +30,7 @@ All devices with existing rearports, which are not connected, are automatically 
 - in „Device B“, select the device you want to connect to the device „Device A“&#xD;
 - the number of ports is determined automatically &#xD;
 - cable types are imported from netbox&#xD;
-- the cable length should be indicated in meters and only whole numbers without decimal places can be entered&#xD;
+- in „Cable Length“, only whole numbers without decimal places can be entered, select your prefered length unit in the settings&#xD;
 &#xD;"></Text>
 <Text fx:id="ueberschrift2" wrappingWidth="565" text="Connect rear ports"></Text>
 <Text fx:id="hilfetext" wrappingWidth="565" text="

@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ComboBox?>
 
 
 <VBox fx:id="vbox" alignment="center" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
@@ -26,10 +28,14 @@
 
 		<Text  text="API Token:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>         
 		<TextField fx:id="Token" maxWidth="300" minWidth="275" minHeight="35" GridPane.columnIndex="1" GridPane.rowIndex="3"></TextField>
-
-
-		<Button fx:id="exitbutton" onAction="#ExitOnAction" text="Close" maxWidth="100" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-		<Button fx:id="speicherbutton" onAction="#SpeichernOnAction" text="Save and Close" maxWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+		
+		<Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+		
+		<Text  text="Length Unit*:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>         
+		<ComboBox fx:id="LengthUnit" maxWidth="150" minWidth="150" minHeight="35" GridPane.columnIndex="1" GridPane.rowIndex="5"></ComboBox>
+		
+		<Button fx:id="exitbutton" onAction="#ExitOnAction" text="Close" maxWidth="100" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+		<Button fx:id="speicherbutton" onAction="#SpeichernOnAction" text="Save and Close" maxWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 		
   	</GridPane>
        

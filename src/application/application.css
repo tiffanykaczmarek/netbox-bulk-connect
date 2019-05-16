@@ -1,5 +1,5 @@
 #vbox {
-    -fx-background-color: #D9EDF7;
+    -fx-background-color: #e3f0ff;
     -fx-padding: 0 0 0 0;
 	}
 
@@ -23,9 +23,6 @@
 	}
     
 #aktualisierbtn {          
-    -fx-background-size: 28 28;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position:center;   
     -fx-text-fill: #0080FF;
     -fx-font-size: 14px;
     -fx-base: #ffffff;
@@ -64,6 +61,13 @@ Button {
     -fx-font-size: 14px;
     -fx-background-radius: 5;
 	}
+	
+#LengthUnit {
+    -fx-min-width: 150px;
+    -fx-min-height: 30px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+	}
 
 TextField {
 	-fx-highlight-fill: #60B1FB;
@@ -73,6 +77,12 @@ TextField {
 
 Text {
 	-fx-font-size: 14px;
+	}
+	
+#choose, #leinheit {
+	-fx-font-size: 10px;
+	-fx-text-fill: #0B3861;
+	-fx-fill: #0B3861;
 	}
 	
 #hilfetext {
