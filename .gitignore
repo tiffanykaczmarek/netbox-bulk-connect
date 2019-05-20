@@ -1,12 +1,7 @@
 /config.json
 Thumbs.db
-netbox-bulk-connect_lib/**
 target/**
-*.jar
-*.war
-*.ear
 *.class
-*.pydevproject
 .project
 .metadata
 bin/**
@@ -16,9 +11,8 @@ tmp/**/*
 *.bak
 *.swp
 *~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
-.externalToolBuilders/
-*.launch
+/netbox-bulk-connect.xml
+/netbox-bulk-connect_lib
+/.classpath
+/.project
+/.settings
