@@ -358,7 +358,7 @@ public class MainController implements Initializable {
 			JSONArray ports = obj.getJSONArray("results");
 
 			for (int i = 0; i < ports.length(); i++) {
-				String deviceName = ports.getJSONObject(i).getJSONObject("device").getString("name");
+				String deviceName = ports.getJSONObject(i).getJSONObject("device").optString("name");
 				boolean isConnected = !ports.getJSONObject(i).isNull("cable");
 
 				if(!isConnected) {

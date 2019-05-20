@@ -3,8 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="netbox-bulk-connect_lib/gson.jar"/>
-	<classpathentry kind="lib" path="netbox-bulk-connect_lib/json.jar"/>
-	<classpathentry kind="lib" path="netbox-bulk-connect_lib/org.eclipse.fx.ide.css.jfx8_3.5.0.201902220800.jar"/>
+	<classpathentry kind="lib" path="/netbox-bulk-connect/netbox-bulk-connect_lib/json.jar"/>
+	<classpathentry kind="lib" path="/netbox-bulk-connect/netbox-bulk-connect_lib/gson.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
