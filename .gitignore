@@ -16,3 +16,5 @@ tmp/**/*
 /.classpath
 /.project
 /.settings
+/netbox-bulk-connect.jar
+/netbox-bulk-connect.exe
