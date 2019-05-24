@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.text.Collator;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -19,6 +20,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,8 +80,10 @@ public class MainController implements Initializable {
 	public void done () throws IOException {
 		DeviceA.getItems().removeAll(DeviceA.getItems());
 		DeviceB.getItems().removeAll(DeviceB.getItems());
-		DeviceA.getItems().addAll(devicelist);
-		DeviceB.getItems().addAll(devicelist);
+	//	DeviceA.getItems().addAll(devicelist);
+	//	DeviceB.getItems().addAll(devicelist);
+		DeviceA.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
+		DeviceB.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
 		DeviceA.setValue("Select Device");
 		DeviceB.setValue("-");
 		Ports.setText("");
