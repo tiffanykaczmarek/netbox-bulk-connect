@@ -80,8 +80,6 @@ public class MainController implements Initializable {
 	public void done () throws IOException {
 		DeviceA.getItems().removeAll(DeviceA.getItems());
 		DeviceB.getItems().removeAll(DeviceB.getItems());
-	//	DeviceA.getItems().addAll(devicelist);
-	//	DeviceB.getItems().addAll(devicelist);
 		DeviceA.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
 		DeviceB.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
 		DeviceA.setValue("Select Device");
