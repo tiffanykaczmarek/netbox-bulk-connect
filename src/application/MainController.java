@@ -196,6 +196,11 @@ public class MainController implements Initializable {
 			int portanzahla = Portsa.size();
 			int portanzahlb = Portsb.size();
 			int portanzahl = Math.min(portanzahla, portanzahlb);
+			
+			int ports_manuell = Integer.parseInt(Ports.getText());
+			if (ports_manuell != portanzahl) {
+				portanzahl = ports_manuell;
+			}
 				
 			String cc = Kabellänge.getText();
 			boolean pruefzahl = true;
@@ -283,6 +288,12 @@ public class MainController implements Initializable {
 				int portanzahla = PortIDa.size();
 				int portanzahlb = PortIDb.size();
 				int portanzahl = Math.min(portanzahla, portanzahlb);
+				int ports_manuell = Integer.parseInt(Ports.getText());
+				
+				if (ports_manuell != portanzahl) {
+					portanzahl = ports_manuell;
+				}
+				
 				int einheit = length_unit.get(Config.getInstance().LengthUnit);
 				String streinheit = Config.getInstance().LengthUnit;
 				
@@ -398,7 +409,7 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Ausgabe.setEditable(false);
-		Ports.setEditable(false);
+	//	Ports.setEditable(false);
 		length_unit.put("Meters", 1200);
 		length_unit.put("Centimeters", 1100);
 		length_unit.put("Inches", 1200);
