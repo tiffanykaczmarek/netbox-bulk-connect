@@ -76,10 +76,9 @@ public class MainController implements Initializable {
 	int PortanzahlANeu = 0;
 	int PortanzahlBNeu = 0;
 	
-	
 	public void done () throws IOException {
-		DeviceA.getItems().removeAll(DeviceA.getItems());
-		DeviceB.getItems().removeAll(DeviceB.getItems());
+//		DeviceA.getItems().removeAll(DeviceA.getItems());
+//		DeviceB.getItems().removeAll(DeviceB.getItems());
 		DeviceA.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
 		DeviceB.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
 		DeviceA.setValue("Select Device");
@@ -198,10 +197,17 @@ public class MainController implements Initializable {
 			int portanzahl = Math.min(portanzahla, portanzahlb);
 			
 			int ports_manuell = Integer.parseInt(Ports.getText());
-			if (ports_manuell != portanzahl) {
+
+			if (ports_manuell < portanzahl && ports_manuell != portanzahl) {
 				portanzahl = ports_manuell;
 			}
-				
+			
+			else if (ports_manuell > portanzahl) {
+				portanzahl = Math.min(portanzahla, portanzahlb);
+				Ausgabe.setText("Please correct the number of ports.");
+				return;
+			}
+
 			String cc = Kabellänge.getText();
 			boolean pruefzahl = true;
 				
@@ -288,10 +294,17 @@ public class MainController implements Initializable {
 				int portanzahla = PortIDa.size();
 				int portanzahlb = PortIDb.size();
 				int portanzahl = Math.min(portanzahla, portanzahlb);
-				int ports_manuell = Integer.parseInt(Ports.getText());
 				
-				if (ports_manuell != portanzahl) {
+				int ports_manuell = Integer.parseInt(Ports.getText());
+
+				if (ports_manuell < portanzahl && ports_manuell != portanzahl) {
 					portanzahl = ports_manuell;
+				}
+				
+				else if (ports_manuell > portanzahl) {
+					portanzahl = Math.min(portanzahla, portanzahlb);
+					Ausgabe.setText("Please correct the number of ports.");
+					return;
 				}
 				
 				int einheit = length_unit.get(Config.getInstance().LengthUnit);
@@ -323,7 +336,6 @@ public class MainController implements Initializable {
 							}
 							postrearports.append(']');
 							netbox.post("api/dcim/cables/", postrearports.toString());					
-						
 							Ausgabe.setText(devicea + " and " + deviceb + " successfully connected! \n" + portanzahl + " Ports, " + cablelength + " "+ streinheit + ", cable type " + Kabeltyp.getValue());
 							devicelist.remove(devicea);
 							devicelist.remove(deviceb);
@@ -409,7 +421,6 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Ausgabe.setEditable(false);
-	//	Ports.setEditable(false);
 		length_unit.put("Meters", 1200);
 		length_unit.put("Centimeters", 1100);
 		length_unit.put("Inches", 1200);
