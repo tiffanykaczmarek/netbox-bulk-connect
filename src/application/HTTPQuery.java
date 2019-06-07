@@ -26,7 +26,7 @@ public class HTTPQuery {
         	con.setRequestProperty("Authorization", "Token "+token);
         }
 		BufferedReader in = new BufferedReader(
-				  new InputStreamReader(con.getInputStream()));
+				  new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
 		String inputLine;
 		StringBuffer content = new StringBuffer();
 		while ((inputLine = in.readLine()) != null) {
