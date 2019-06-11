@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -237,7 +236,8 @@ public class MainController implements Initializable {
 	
 	// Import
 	
-	@FXML protected void ImportierenOnAction(ActionEvent event) throws MalformedURLException, IOException, InvocationTargetException {
+	@FXML protected void ImportierenOnAction(ActionEvent event) {
+		try {
 		Config.load("config.json");
 		HTTPQuery netbox = new HTTPQuery(Config.getInstance().URL, Config.getInstance().Token);
 	
@@ -346,6 +346,14 @@ public class MainController implements Initializable {
 						  }
 				}
 			}
+		}
+		} catch (MalformedURLException e) {
+			String fehler = e.toString();
+			Ausgabe.setText(fehler);
+		
+		} catch (IOException e) {
+			String fehler = e.toString();
+			Ausgabe.setText(fehler);
 		}
 	}
 	
