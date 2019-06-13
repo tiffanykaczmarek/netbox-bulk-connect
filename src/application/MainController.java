@@ -440,7 +440,7 @@ public class MainController implements Initializable {
 			System.out.println("Fehler: "+e1);
 			DeviceA.setValue("Connection failed");
 			DeviceB.setValue("-");
-			Ausgabe.setText("The connection to the server failed. Please check the settings.");
+			Ausgabe.setText("The connection to the server failed. Please check the settings.\n" + e1);
 		}
 		
 		
