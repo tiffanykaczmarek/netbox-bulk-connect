@@ -386,9 +386,8 @@ public class MainController implements Initializable {
 										postrearports.append("{\"termination_a_type\": \"" + typeA.getApiName() + "\", \"termination_a_id\": "+ porta + ", \"termination_b_type\": \"" + typeB.getApiName() + "\", \"termination_b_id\": " + portb + ", \"type\": "+ cabletype + ", \"length_unit\": " + einheit + ", \"length\": " + cablelength + "}");
 							}
 							postrearports.append(']');
-							Ausgabe.setText(postrearports.toString());
-//							netbox.post("api/dcim/cables/", postrearports.toString());
-//							Ausgabe.setText(devicea + " and " + deviceb + " successfully connected! \n" + portanzahl + " Ports, " + cablelength + " "+ streinheit + ", cable type " + Kabeltyp.getValue());
+							netbox.post("api/dcim/cables/", postrearports.toString());
+							Ausgabe.setText(devicea + " and " + deviceb + " successfully connected! \n" + portanzahl + " Ports, " + cablelength + " "+ streinheit + ", cable type " + Kabeltyp.getValue());
 							devicelistA.remove(devicea);
 							devicelistB.remove(deviceb);
 
