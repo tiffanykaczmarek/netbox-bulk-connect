@@ -43,12 +43,18 @@
 		</MenuBar>
 		
  	<GridPane alignment="CENTER_LEFT" hgap="13" vgap="13">
- 	
-		<Text text="Device A:" GridPane.columnIndex="0" GridPane.rowIndex="0" />         
-		<ComboBox fx:id="DeviceA" maxWidth="225" minWidth="225" prefHeight="38" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-	 
-		<Text text="Device B:" GridPane.rowIndex="1" />         
-		<ComboBox fx:id="DeviceB" maxWidth="225" minWidth="225" prefHeight="38" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+		<HBox GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER_LEFT">
+			<Text text="Device A:  " />
+			<ComboBox fx:id="DeviceTypeA"  maxWidth="120" minWidth="120" prefHeight="38"/>
+		</HBox>
+
+		<ComboBox fx:id="DeviceA" maxWidth="150" minWidth="150" prefHeight="38" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+		<HBox GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER">
+			<Text text="Device B:  " />
+			<ComboBox fx:id="DeviceTypeB" maxWidth="120" minWidth="120" prefHeight="38" />
+		</HBox>
+		<ComboBox fx:id="DeviceB" maxWidth="150" minWidth="150" prefHeight="38" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 		
 		<Text text="Number of Ports:" GridPane.rowIndex="2" />
 		<TextField fx:id="Ports" maxWidth="225" minWidth="225" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -89,34 +95,63 @@
                <Insets />
             </GridPane.margin>
  		</Button>
-         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+         <VBox prefHeight="200.0" prefWidth="50.0" GridPane.columnIndex="2">
             <children>
                <Text fx:id="choose" strokeType="OUTSIDE" strokeWidth="0.0" text="start index at">
                   <VBox.margin>
-                     <Insets left="60.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </Text>
-               <ComboBox fx:id="StartIndexA" minWidth="100.0" prefWidth="100.0">
+               <ComboBox fx:id="StartIndexA" minWidth="50.0" prefWidth="50.0">
                   <VBox.margin>
                      <Insets left="40.0" />
                   </VBox.margin>
                </ComboBox>
             </children>
          </VBox>
-         <VBox layoutX="411.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <VBox layoutX="411.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <children>
                <Text fx:id="choose" strokeType="OUTSIDE" strokeWidth="0.0" text="start index at" textAlignment="CENTER">
                   <VBox.margin>
-                     <Insets left="60.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </Text>
-               <ComboBox fx:id="StartIndexB" minWidth="100.0" prefWidth="100.0">
+               <ComboBox fx:id="StartIndexB" minWidth="50.0" prefWidth="50.0">
                   <VBox.margin>
                      <Insets left="40.0" />
                   </VBox.margin>
                </ComboBox>
             </children>
          </VBox>
+
+		<VBox prefHeight="200.0" prefWidth="50.0" GridPane.columnIndex="3">
+			<children>
+				<Text fx:id="indexscale" strokeType="OUTSIDE" strokeWidth="0.0" text="Index scale">
+					<VBox.margin>
+						<Insets left="20.0" />
+					</VBox.margin>
+				</Text>
+				<TextField fx:id="IndexScaleA" minWidth="35.0" prefWidth="35.0">
+					<VBox.margin>
+						<Insets left="40.0" />
+					</VBox.margin>
+				</TextField>
+			</children>
+		</VBox>
+		<VBox layoutX="411.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+			<children>
+				<Text fx:id="indexscale" strokeType="OUTSIDE" strokeWidth="0.0" text="Index scale" textAlignment="CENTER">
+					<VBox.margin>
+						<Insets left="20.0" />
+					</VBox.margin>
+				</Text>
+				<TextField fx:id="IndexScaleB" minWidth="35.0" prefWidth="35.0">
+					<VBox.margin>
+						<Insets left="40.0" />
+					</VBox.margin>
+				</TextField>
+			</children>
+		</VBox>
          
          <VBox.margin>
             <Insets left="60.0" />

@@ -7,12 +7,10 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.application.Platform;
@@ -40,11 +38,14 @@ import javafx.stage.Stage;
 
 
 public class MainController implements Initializable {
-	HashMap<String, ArrayList<Rearport> > rear_ports = new HashMap<String, ArrayList<Rearport> >();
+	HashMap<String, ArrayList<Port> > allDevices = new HashMap<String, ArrayList<Port> >();
+	HashMap<String, ArrayList<Port> >  devicesA = new HashMap<String, ArrayList<Port> >();
+	HashMap<String, ArrayList<Port> > devicesB = new HashMap<String, ArrayList<Port> >();
 	HashMap<String, Integer> cable_types = new HashMap<String, Integer>();
 	protected static HashMap<String, Integer> length_unit = new HashMap<String, Integer>();
 	ObservableList<String> cablelist = FXCollections.observableArrayList();
-	ObservableList<String> devicelist = FXCollections.observableArrayList();
+	ObservableList<String> devicelistA = FXCollections.observableArrayList();
+	ObservableList<String> devicelistB = FXCollections.observableArrayList();
 	
 	@FXML
 	private ChoiceBox<String> Kabeltyp;
@@ -56,13 +57,13 @@ public class MainController implements Initializable {
 	private VBox vbox;
 
 	@FXML
-	private ComboBox<String> DeviceB, DeviceA, StartIndexA, StartIndexB;
+	private ComboBox<String> DeviceB, DeviceA, StartIndexA, StartIndexB, DeviceTypeA, DeviceTypeB;
 
 	@FXML
 	protected Button ausgabebutton, kopierbutton, importbutton, aktualisierbtn;
 
 	@FXML
-	private TextField Ports, Kabellänge;
+	private TextField Ports, Kabellänge, IndexScaleA, IndexScaleB;
 	
 	@FXML 
 	private TextArea Ausgabe;
@@ -78,9 +79,11 @@ public class MainController implements Initializable {
 	public void done () throws IOException {
 //		DeviceA.getItems().removeAll(DeviceA.getItems());
 //		DeviceB.getItems().removeAll(DeviceB.getItems());
-		DeviceA.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
-		DeviceB.setItems(new SortedList<String>(devicelist, Collator.getInstance()));
+		DeviceA.setItems(new SortedList<String>(devicelistA, Collator.getInstance()));
+		DeviceB.setItems(new SortedList<String>(devicelistB, Collator.getInstance()));
 		DeviceA.setValue("Select Device");
+		IndexScaleA.setText("1");
+		IndexScaleB.setText("1");
 		DeviceB.setValue("-");
 		Ports.setText("");
 		Kabellänge.setText("");
@@ -172,18 +175,34 @@ public class MainController implements Initializable {
 			ArrayList<String> Portsa = new ArrayList<String>();
 			ArrayList<String> Portsb = new ArrayList<String>();
 
-			for (int i = 0; i < (rear_ports.get(devicea).size()); i++) {
-				Portsa.add(rear_ports.get(devicea).get(i).getName());
+			for (int i = 0; i < (devicesA.get(devicea).size()); i++) {
+				Portsa.add(devicesA.get(devicea).get(i).getName());
 			}
-			for (int i = 0; i < (rear_ports.get(deviceb).size()); i++) {
-				Portsb.add(rear_ports.get(deviceb).get(i).getName());
+			for (int i = 0; i < (devicesB.get(deviceb).size()); i++) {
+				Portsb.add(devicesB.get(deviceb).get(i).getName());
 			}
 			String PortStarta = StartIndexA.getValue();
+
+			String indexScaleAString = IndexScaleA.getText();
+			if(!isInteger(indexScaleAString, 10)) {
+				Ausgabe.setText("Input for index scale accepts only integer numbers.");
+				return;
+			}
+			int indexScaleA = Integer.parseInt(indexScaleAString);
+
 			int starta = Portsa.indexOf(PortStarta);
 			for (int i = 0; i < starta; i++) {
 				Portsa.remove(0);
 			}
 			String PortStartb = StartIndexB.getValue();
+
+			String indexScaleBString = IndexScaleB.getText();
+			if(!isInteger(indexScaleBString, 10)) {
+				Ausgabe.setText("Input for index scale accepts only integer numbers.");
+				return;
+			}
+			int indexScaleB = Integer.parseInt(indexScaleBString);
+
 			int startb = Portsb.indexOf(PortStartb);
 			for (int i = 0; i < startb; i++) {
 				Portsb.remove(0);
@@ -193,7 +212,7 @@ public class MainController implements Initializable {
 
 			int portanzahla = Portsa.size();
 			int portanzahlb = Portsb.size();
-			int portanzahl = Math.min(portanzahla, portanzahlb);
+			int portanzahl = Math.min(portanzahla / indexScaleA, portanzahlb / indexScaleB);
 			
 			int ports_manuell = Integer.parseInt(Ports.getText());
 
@@ -202,8 +221,8 @@ public class MainController implements Initializable {
 			}
 			
 			else if (ports_manuell > portanzahl) {
-				portanzahl = Math.min(portanzahla, portanzahlb);
-				Ausgabe.setText("Please correct the number of ports.");
+
+				Ausgabe.setText("Please correct the number of ports. Maximum available port number at current index scale is : " + portanzahl);
 				return;
 			}
 
@@ -224,10 +243,18 @@ public class MainController implements Initializable {
 					Ausgabe.setText("Please correct your entries. All Fields are mandatory fields and must be filled.");
 				}
 				else {
+					int deviceAIndex = 0;
+					int deviceBIndex = 0;
+					String typeStringA = DeviceTypeA.getValue();
+					Port.Type typeA = Port.Type.valueOf(typeStringA);
+					String typeStringB = DeviceTypeB.getValue();
+					Port.Type typeB = Port.Type.valueOf(typeStringB);
 					for (int i = 0; i < portanzahl; i++) {
-						String porta = Portsa.get(i);
-						String portb = Portsb.get(i);
-						Ausgabezeile = Ausgabezeile + "\n" + devicea + ",rearport," + porta + "," + deviceb + ",rearport," + portb + "," + Kabel + "," + Kabellänge.getText() + "," + Config.getInstance().LengthUnit;
+						String porta = Portsa.get(deviceAIndex);
+						String portb = Portsb.get(deviceBIndex);
+						deviceAIndex += indexScaleA;
+						deviceBIndex += indexScaleB;
+						Ausgabezeile = Ausgabezeile + "\n" + devicea + "," + typeA + "," + porta + "," + deviceb + "," + typeB + "," + portb + "," + Kabel + "," + Kabellänge.getText() + "," + Config.getInstance().LengthUnit;
 					}
 					Ausgabe.setText(Standardzeile + Ausgabezeile);
 				}
@@ -271,21 +298,37 @@ public class MainController implements Initializable {
 				ArrayList<String> Portsa = new ArrayList<String>();
 				ArrayList<String> Portsb = new ArrayList<String>();
 		
-				for (int i = 0; i < (rear_ports.get(devicea).size()); i++) {
-					PortIDa.add(rear_ports.get(devicea).get(i).getID());
-					Portsa.add(rear_ports.get(devicea).get(i).getName());
+				for (int i = 0; i < (devicesA.get(devicea).size()); i++) {
+					PortIDa.add(devicesA.get(devicea).get(i).getID());
+					Portsa.add(devicesA.get(devicea).get(i).getName());
 				}
-				for (int i = 0; i < (rear_ports.get(deviceb).size()); i++) {
-					PortIDb.add(rear_ports.get(deviceb).get(i).getID());
-					Portsb.add(rear_ports.get(deviceb).get(i).getName());
+				for (int i = 0; i < (devicesB.get(deviceb).size()); i++) {
+					PortIDb.add(devicesB.get(deviceb).get(i).getID());
+					Portsb.add(devicesB.get(deviceb).get(i).getName());
 				}
 				
 				String PortStarta = StartIndexA.getValue();
+
+				String indexScaleAString = IndexScaleA.getText();
+				if(!isInteger(indexScaleAString, 10)) {
+					Ausgabe.setText("Input for index scale accepts only integer numbers.");
+					return;
+				}
+				int indexScaleA = Integer.parseInt(indexScaleAString);
+
 				int starta = Portsa.indexOf(PortStarta);
 				for (int i = 0; i < starta; i++) {
 					PortIDa.remove(0);
 				}
 				String PortStartb = StartIndexB.getValue();
+
+				String indexScaleBString = IndexScaleB.getText();
+				if(!isInteger(indexScaleBString, 10)) {
+					Ausgabe.setText("Input for index scale accepts only integer numbers.");
+					return;
+				}
+				int indexScaleB = Integer.parseInt(indexScaleBString);
+
 				int startb = Portsb.indexOf(PortStartb);
 				for (int i = 0; i < startb; i++) {
 					PortIDb.remove(0);
@@ -293,7 +336,7 @@ public class MainController implements Initializable {
 				
 				int portanzahla = PortIDa.size();
 				int portanzahlb = PortIDb.size();
-				int portanzahl = Math.min(portanzahla, portanzahlb);
+				int portanzahl = Math.min(portanzahla / indexScaleA, portanzahlb / indexScaleB);
 				
 				int ports_manuell = Integer.parseInt(Ports.getText());
 
@@ -327,18 +370,28 @@ public class MainController implements Initializable {
 							int cablelength = Integer.parseInt(Kabellänge.getText());
 							StringBuffer postrearports = new StringBuffer(4096);
 							postrearports.append('[');
+							int deviceAIndex = 0;
+							int deviceBIndex = 0;
+							String typeStringA = DeviceTypeA.getValue();
+							Port.Type typeA = Port.Type.valueOf(typeStringA);
+							String typeStringB = DeviceTypeB.getValue();
+							Port.Type typeB = Port.Type.valueOf(typeStringB);
 							for (int i = 0; i < portanzahl; i++) {
-								int porta = PortIDa.get(i);
-								int portb = PortIDb.get(i);
+								int porta = PortIDa.get(deviceAIndex);
+								int portb = PortIDb.get(deviceBIndex);
+								deviceAIndex += indexScaleA;
+								deviceBIndex += indexScaleB;
 									if(i>0)
 										postrearports.append(',');
-										postrearports.append("{\"termination_a_type\": \"dcim.rearport\", \"termination_a_id\": "+ porta + ", \"termination_b_type\": \"dcim.rearport\", \"termination_b_id\": " + portb + ", \"type\": "+ cabletype + ", \"length_unit\": " + einheit + ", \"length\": " + cablelength + "}");
+										postrearports.append("{\"termination_a_type\": \"" + typeA.getApiName() + "\", \"termination_a_id\": "+ porta + ", \"termination_b_type\": \"" + typeB.getApiName() + "\", \"termination_b_id\": " + portb + ", \"type\": "+ cabletype + ", \"length_unit\": " + einheit + ", \"length\": " + cablelength + "}");
 							}
 							postrearports.append(']');
-							netbox.post("api/dcim/cables/", postrearports.toString());					
-							Ausgabe.setText(devicea + " and " + deviceb + " successfully connected! \n" + portanzahl + " Ports, " + cablelength + " "+ streinheit + ", cable type " + Kabeltyp.getValue());
-							devicelist.remove(devicea);
-							devicelist.remove(deviceb);
+							Ausgabe.setText(postrearports.toString());
+//							netbox.post("api/dcim/cables/", postrearports.toString());
+//							Ausgabe.setText(devicea + " and " + deviceb + " successfully connected! \n" + portanzahl + " Ports, " + cablelength + " "+ streinheit + ", cable type " + Kabeltyp.getValue());
+							devicelistA.remove(devicea);
+							devicelistB.remove(deviceb);
+
 							done();
 						}
 						  else {
@@ -375,19 +428,34 @@ public class MainController implements Initializable {
 		leinheit.setText(Config.getInstance().LengthUnit);
 	}
 
+	private void refreshNetboxDevices() throws Exception{
+		devicelistA.clear();
+		devicelistB.clear();
+		devicesA.clear();
+		devicesB.clear();
+		allDevices.clear();
+		queryNetboxDevices(Port.Type.FRONTPORT);
+		queryNetboxDevices(Port.Type.REARPORT);
+		queryNetboxDevices(Port.Type.INTERFACE);
+	}
+
 
 	// Liste der Device Namen abfragen
-
-	private void queryNetboxDevices() throws Exception  {  
+	private void queryNetboxDevices(final Port.Type type) throws Exception  {
 		Config.load("config.json");
 		HTTPQuery netbox = new HTTPQuery(Config.getInstance().URL, Config.getInstance().Token);
-		devicelist.removeAll(devicelist);	
+
 		int offsetzähler = 0;
 		boolean next;
-		rear_ports.clear();
-		
+
+		String apiPath = getURLPathByDeviceType(type);
+		if(apiPath == null) {
+			Ausgabe.setText("Can't find the API path for device type: " + type);
+			return;
+		}
+
 		do {
-			JSONObject obj = new JSONObject(netbox.query("api/dcim/rear-ports/?brief=1&limit=100&offset=" + offsetzähler));
+			JSONObject obj = new JSONObject(netbox.query("api/dcim/" + apiPath + "/?brief=1&limit=100&offset=" + offsetzähler));
 			JSONArray ports = obj.getJSONArray("results");
 
 			for (int i = 0; i < ports.length(); i++) {
@@ -395,17 +463,17 @@ public class MainController implements Initializable {
 				boolean isConnected = !ports.getJSONObject(i).isNull("cable");
 
 				if(!isConnected) {
-					if(rear_ports.containsKey(deviceName)) {
-						ArrayList<Rearport> list = rear_ports.get(deviceName);
-						Rearport r = new Rearport(ports.getJSONObject(i).getInt("id"), ports.getJSONObject(i).getString("name"));
+					if(allDevices.containsKey(deviceName)) {
+						ArrayList<Port> list = allDevices.get(deviceName);
+						Port r = new Port(ports.getJSONObject(i).getInt("id"), ports.getJSONObject(i).getString("name"), type);
 						list.add(r);
-						rear_ports.put(deviceName, list);
+						allDevices.put(deviceName, list);
 					}
 					else {
-						ArrayList<Rearport> list = new ArrayList<Rearport>();
-						Rearport r = new Rearport(ports.getJSONObject(i).getInt("id"), ports.getJSONObject(i).getString("name"));
+						ArrayList<Port> list = new ArrayList<Port>();
+						Port r = new Port(ports.getJSONObject(i).getInt("id"), ports.getJSONObject(i).getString("name"), type);
 						list.add(r);
-						rear_ports.put(deviceName, list);
+						allDevices.put(deviceName, list);
 					}
 				}
 			}
@@ -413,16 +481,17 @@ public class MainController implements Initializable {
 			offsetzähler = offsetzähler +100;
 		}while(next);
 
-		Set<String> p = rear_ports.keySet();
-		Iterator<String> it = p.iterator();
-		while(it.hasNext()) {
-			String panel = it.next();
-			ArrayList<Rearport> list = rear_ports.get(panel);
-			if(list.size()>1) {
-				devicelist.add(panel);
-			}
-		}
+
 		done();
+	}
+
+	private String getURLPathByDeviceType(Port.Type type) {
+		switch (type) {
+			case REARPORT: return "rear-ports";
+			case FRONTPORT: return "front-ports";
+			case INTERFACE: return "interfaces";
+			default: return null;
+		}
 	}
 
 
@@ -433,8 +502,9 @@ public class MainController implements Initializable {
 		length_unit.put("Centimeters", 1100);
 		length_unit.put("Inches", 1200);
 		length_unit.put("Feet", 2100);
+		initializeDeviceTypeDropdowns();
 		try {
-			queryNetboxDevices();
+			refreshNetboxDevices();
 			queryNetbox();
 		} catch (Exception e1) {
 			System.out.println("Fehler: "+e1);
@@ -454,8 +524,8 @@ public class MainController implements Initializable {
 			ArrayList<String> Portsneu = new ArrayList<String>();
 			Portsneu.removeAll(Portsneu);
 			
-			for (int i = 0; i < (rear_ports.get(deviceName).size()); i++) {
-				Portsneu.add(rear_ports.get(deviceName).get(i).getName());
+			for (int i = 0; i < (devicesA.get(deviceName).size()); i++) {
+				Portsneu.add(devicesA.get(deviceName).get(i).getName());
 			}
 			
 			PortanzahlA = Portsneu.size();
@@ -483,7 +553,7 @@ public class MainController implements Initializable {
 				//Device wurde gesplittet. Test ob römische 2 vorhanden, sowie Test ob Device überhaupt existiert
 
 				if (splitstrings.length <= 2) {
-					if (devicelist.contains(combovorauswahl)) {
+					if (devicelistB.contains(combovorauswahl)) {
 						DeviceB.setValue(combovorauswahl);
 					} 
 					else {
@@ -495,7 +565,7 @@ public class MainController implements Initializable {
 
 				else {
 					combovorauswahl = combovorauswahl + "-" + splitstrings[2];
-					if (devicelist.contains(combovorauswahl)) {
+					if (devicelistB.contains(combovorauswahl)) {
 						DeviceB.setValue(combovorauswahl);
 					} 
 					else {
@@ -524,8 +594,8 @@ public class MainController implements Initializable {
 			ArrayList<String> Portsneu = new ArrayList<String>();
 			Portsneu.removeAll(Portsneu);
 			
-			for (int i = 0; i < (rear_ports.get(deviceName).size()); i++) {
-				Portsneu.add(rear_ports.get(deviceName).get(i).getName());
+			for (int i = 0; i < (devicesB.get(deviceName).size()); i++) {
+				Portsneu.add(devicesB.get(deviceName).get(i).getName());
 			}
 			
 			PortanzahlB = Portsneu.size();
@@ -599,9 +669,82 @@ public class MainController implements Initializable {
 			}
 			Ports.setText(Integer.toString(PortAnzahlAutomatisch));
 		}
-	});	
-		
-		
+	});
+
+	DeviceTypeA.getSelectionModel().selectedIndexProperty()
+			.addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+
+				devicesA.clear();
+				devicelistA.clear();
+				String typeString = DeviceTypeA.getValue();
+				Port.Type type = Port.Type.valueOf(typeString);
+				Set<String> p = allDevices.keySet();
+				Iterator<String> it = p.iterator();
+				while(it.hasNext()) {
+					String panel = it.next();
+					List<Port> list = allDevices.get(panel)
+							.stream()
+							.filter(port -> port.getType().equals(type))
+							.collect(Collectors.toList());
+
+					if(list.size()>1) {
+						devicesA.put(panel, (ArrayList)list);
+						devicelistA.add(panel);
+					}
+				}
+
+			});
+
+		DeviceTypeB.getSelectionModel().selectedIndexProperty()
+				.addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+
+					devicesB.clear();
+					devicelistB.clear();
+					String typeString = DeviceTypeB.getValue();
+					Port.Type type = Port.Type.valueOf(typeString);
+					Set<String> p = allDevices.keySet();
+					Iterator<String> it = p.iterator();
+					while(it.hasNext()) {
+						String panel = it.next();
+						List<Port> list = allDevices.get(panel)
+								.stream()
+								.filter(port -> port.getType().equals(type))
+								.collect(Collectors.toList());
+
+						if(list.size()>1) {
+							devicesB.put(panel, (ArrayList)list);
+							devicelistB.add(panel);
+						}
+					}
+
+				});
+
+	}
+
+	private void initializeDeviceTypeDropdowns() {
+		ObservableList<String> deviceTypes = FXCollections.observableArrayList(Arrays.stream(Port.Type.values())
+				.map(Enum::name)
+				.collect(Collectors.toList()));
+
+		DeviceTypeA.getItems().clear();
+		DeviceTypeA.setItems(deviceTypes);
+		DeviceTypeA.setValue("Choose type");
+
+		DeviceTypeB.getItems().clear();
+		DeviceTypeB.setItems(deviceTypes);
+		DeviceTypeB.setValue("Choose type");
+	}
+
+	private boolean isInteger(String s, int radix) {
+		if(s.isEmpty()) return false;
+		for(int i = 0; i < s.length(); i++) {
+			if(i == 0 && s.charAt(i) == '-') {
+				if(s.length() == 1) return false;
+				else continue;
+			}
+			if(Character.digit(s.charAt(i),radix) < 0) return false;
+		}
+		return true;
 	}
 
 }
