@@ -87,7 +87,7 @@
  			<Tooltip text="refresh devices" />
  			</tooltip>
  		</Button>
- 		<Button fx:id="importbutton" maxWidth="210.0" minWidth="210.0" onAction="#ImportierenOnAction" text="Connect Rear Ports" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+ 		<Button fx:id="importbutton" maxWidth="210.0" minWidth="210.0" onAction="#ImportierenOnAction" text="Connect Ports" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
 			<tooltip>
  			<Tooltip text="automatically connect devices in netbox" />
  			</tooltip>

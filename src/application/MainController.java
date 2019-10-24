@@ -333,10 +333,25 @@ public class MainController implements Initializable {
 				for (int i = 0; i < startb; i++) {
 					PortIDb.remove(0);
 				}
-				
+
 				int portanzahla = PortIDa.size();
 				int portanzahlb = PortIDb.size();
-				int portanzahl = Math.min(portanzahla / indexScaleA, portanzahlb / indexScaleB);
+
+				int indexedPortCountA, indexedPortCountB;
+
+				if (portanzahla % indexScaleA != 0) {
+				    indexedPortCountA = (portanzahla / indexScaleA) + 1;
+                } else {
+                    indexedPortCountA = portanzahla / indexScaleA;
+                }
+
+                if (portanzahlb % indexScaleB != 0) {
+                    indexedPortCountB = (portanzahlb / indexScaleB) + 1;
+                } else {
+                    indexedPortCountB = portanzahlb / indexScaleB;
+                }
+
+				int portanzahl = Math.min(indexedPortCountA, indexedPortCountB);
 				
 				int ports_manuell = Integer.parseInt(Ports.getText());
 
@@ -345,8 +360,7 @@ public class MainController implements Initializable {
 				}
 				
 				else if (ports_manuell > portanzahl) {
-					portanzahl = Math.min(portanzahla, portanzahlb);
-					Ausgabe.setText("Please correct the number of ports.");
+                    Ausgabe.setText("Please correct the number of ports. Maximum available port number at current index scale is : " + portanzahl);
 					return;
 				}
 				
