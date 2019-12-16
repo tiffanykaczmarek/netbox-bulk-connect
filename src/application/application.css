@@ -79,7 +79,7 @@ Text {
 	-fx-font-size: 14px;
 	}
 	
-#choose, #leinheit {
+#choose, #leinheit, #indexscale {
 	-fx-font-size: 10px;
 	-fx-text-fill: #0B3861;
 	-fx-fill: #0B3861;
